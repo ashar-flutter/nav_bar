@@ -4,9 +4,9 @@ import 'colors.dart';
 class AppGradients {
   static LinearGradient get splashGradient => LinearGradient(
     colors: [
-      AppColors.deepPurple.withOpacity(0.9),
+      AppColors.deepPurple.withValues(alpha: 0.9),
       AppColors.midnightBlue,
-      AppColors.deepPurple.withOpacity(0.8),
+      AppColors.deepPurple.withValues(alpha: 0.8),
     ],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

@@ -11,7 +11,8 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _fadeIn;
 
@@ -28,15 +29,21 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _controller.forward();
 
-    Future.delayed(const Duration(seconds: 4), () {
-      Navigator.of(context).pushReplacement(
-        PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const MainScreen(),
-          transitionsBuilder: (_, animation, __, child) => FadeTransition(opacity: animation, child: child),
-          transitionDuration: const Duration(milliseconds: 700),
-        ),
-      );
-    });
+    _navigateToMain();
+  }
+
+  Future<void> _navigateToMain() async {
+    await Future.delayed(const Duration(seconds: 4));
+    // Ensure widget is still in tree
+    if (!mounted) return;
+    Navigator.of(context).pushReplacement(
+      PageRouteBuilder(
+        pageBuilder: (_, __, ___) => const MainScreen(),
+        transitionsBuilder: (_, animation, __, child) =>
+            FadeTransition(opacity: animation, child: child),
+        transitionDuration: const Duration(milliseconds: 700),
+      ),
+    );
   }
 
   @override
@@ -65,13 +72,15 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         alignment: Alignment.center,
         child: FadeTransition(
           opacity: _fadeIn,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildIcon(),
-              const SizedBox(height: 40),
-              Text('Flutter Premium Splash', style: AppTypography.splashText),
-            ],
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildIcon(),
+                const SizedBox(height: 40),
+                Text('Flutter Premium', style: AppTypography.splashText),
+              ],
+            ),
           ),
         ),
       ),

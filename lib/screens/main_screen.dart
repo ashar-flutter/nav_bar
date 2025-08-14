@@ -12,7 +12,7 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<MainScreen> with AutomaticKeepAliveClientMixin {
   final PageController _pageController = PageController();
   int _selectedIndex = 0;
 
@@ -25,7 +25,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _onPageChanged(int index) {
-
     setState(() {
       _selectedIndex = index;
     });
@@ -38,7 +37,11 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   @override
+  bool get wantKeepAlive => true; // Preserve tab state
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context); // For AutomaticKeepAliveClientMixin
     return Scaffold(
       body: PageView(
         physics: const BouncingScrollPhysics(),
@@ -58,3 +61,4 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
+

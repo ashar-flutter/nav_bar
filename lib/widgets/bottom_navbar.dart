@@ -6,6 +6,7 @@ import 'gradient_icon.dart';
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
   final Function(int) onTap;
+
    BottomNavBar({super.key, required this.currentIndex, required this.onTap});
 
   final List<IconData> icons = [
@@ -20,7 +21,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         gradient: AppGradients.bottomNavGradient,
         boxShadow: [BoxShadow(color: Colors.black87, blurRadius: 14, offset: Offset(0, -4))],
       ),
